@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.suurd.akamai.ccu.client.model.Configuration;
 import org.suurd.akamai.ccu.client.model.Constants;
 import org.suurd.akamai.ccu.client.model.PurgeRequest;
 import org.suurd.akamai.ccu.client.model.PurgeResponse;
@@ -14,8 +15,8 @@ import org.suurd.akamai.ccu.client.model.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.model.PurgeStatusRequest;
 import org.suurd.akamai.ccu.client.model.PurgeStatusResponse;
 import org.suurd.akamai.ccu.client.model.Queue;
+import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
 import org.suurd.akamai.ccu.client.provider.HttpTransportProvider;
-import org.suurd.akamai.ccu.client.util.Configuration;
 import org.suurd.akamai.ccu.client.util.HttpRequestHelper;
 
 import com.akamai.edgegrid.signer.ClientCredential;
@@ -50,13 +51,14 @@ public class CcuV2Client implements CcuClient {
 
 	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
 
-	private static Configuration configuration = Configuration.getInstance();
+	private Configuration configuration;
 
 	private HttpTransportProvider transportProvider;
 
 	private ClientCredentialProvider credentialProvider;
 
-	public CcuV2Client(HttpTransportProvider transportProvider) {
+	public CcuV2Client(ConfigurationProvider configurationProvider, HttpTransportProvider transportProvider) {
+		this.configuration = configurationProvider.getConfiguration();
 		this.transportProvider = transportProvider;
 		this.credentialProvider = createCredentialProvider();
 	}
