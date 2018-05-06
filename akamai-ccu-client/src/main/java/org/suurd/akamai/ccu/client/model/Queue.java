@@ -1,12 +1,35 @@
 package org.suurd.akamai.ccu.client.model;
 
+/**
+ * Enumeration of the queue to use, either default (default) or emergency.
+ * 
+ * @author jsuurd
+ */
 public enum Queue {	
 
+	/**
+	 * The default queue.
+	 */
 	DEFAULT("default"),
 
+	/**
+	 * The emergency queue. 
+	 */
 	EMERGENCY("emergency");	
 
+	/**
+	 * The queue to use
+	 */
 	private String queueName;
+
+	/**
+	 * Constructs a queue with the specified queue name.
+	 * 
+	 * @param queueName the queue name
+	 */
+	private Queue(String queueName) {
+		this.queueName = queueName;
+	}
 
 	@Override
 	public String toString() {
@@ -17,12 +40,11 @@ public enum Queue {
 		return sb.toString();
 	}
 
-	private Queue(String queueName) {
-		this.queueName = queueName;
-	}
-
+	/**
+	 * @return the queueName
+	 */
 	public String getQueueName() {
-		return this.queueName;
+		return queueName;
 	}
 
 }

@@ -40,8 +40,8 @@ import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 
 /**
- * https://github.com/akamai/AkamaiOPEN-edgegrid-java/tree/master/edgegrid-signer-core
- * https://github.com/akamai/AkamaiOPEN-edgegrid-java/tree/master/edgegrid-signer-google-http-client
+ * Implementation of the CCU client representing the Akamai Content Control
+ * Utility API v2.
  * 
  * @author jsuurd
  */
@@ -57,6 +57,13 @@ public class CcuV2Client implements CcuClient {
 
 	private ClientCredentialProvider credentialProvider;
 
+	/**
+	 * Constructs a CCU v2 client with the specified configuration provider and HTTP
+	 * transport provider.
+	 * 
+	 * @param configurationProvider the configuration provider
+	 * @param transportProvider the HTTP transport provider
+	 */
 	public CcuV2Client(ConfigurationProvider configurationProvider, HttpTransportProvider transportProvider) {
 		this.configuration = configurationProvider.getConfiguration();
 		this.transportProvider = transportProvider;
@@ -205,7 +212,7 @@ public class CcuV2Client implements CcuClient {
 		headers.set("Host", configuration.getBaseAuthority());
 		headers.set("Pragma", "edgegrid-fingerprints-on");
 		headers.setContentType(Constants.CONTENT_TYPE_JSON);
-		headers.setAccept(Constants.CONTENT_TYPE_JSON);		
+		headers.setAccept(Constants.CONTENT_TYPE_JSON);
 		
 		HttpResponse response = request.execute();
 		T ccuResponse;

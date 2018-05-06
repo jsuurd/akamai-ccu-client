@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.CcuClientException;
 import org.suurd.akamai.ccu.client.model.Configuration;
 
+/**
+ * Implementation of configuration provider that provides the configuration
+ * populated from a properties file in the classpath of the application.
+ * 
+ * @author jsuurd
+ */
 public class FileConfigurationProvider implements ConfigurationProvider {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FileConfigurationProvider.class);
@@ -18,14 +24,13 @@ public class FileConfigurationProvider implements ConfigurationProvider {
 	public Configuration getConfiguration() {
 		if (configuration == null) {
 			Properties configurationProperties = getConfigurationProperties();
-			
-			configuration = new Configuration(
-					configurationProperties.getProperty("baseAuthority"),
+
+			configuration = new Configuration(configurationProperties.getProperty("baseAuthority"),
 					configurationProperties.getProperty("accessToken"),
 					configurationProperties.getProperty("clientToken"),
 					configurationProperties.getProperty("clientSecret"),
 					configurationProperties.getProperty("queuesEndpoint"));
-			
+
 			// Optional properties
 			String connectTimeout = configurationProperties.getProperty("connectTimeout");
 			if (connectTimeout != null) {
@@ -48,7 +53,7 @@ public class FileConfigurationProvider implements ConfigurationProvider {
 		try {
 			configurationProperties = ConfigurationPropertiesLoader.getInstance().getConfigurationProperties();
 		} catch (IOException e) {
-			String message = "Error loading configuration"; 
+			String message = "Error loading configuration";
 			LOG.error(message, e);
 			throw new CcuClientException(message, e);
 		}
