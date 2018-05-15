@@ -1,5 +1,7 @@
 package org.suurd.akamai.ccu.client.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.google.api.client.util.Key;
 
 /**
@@ -41,11 +43,7 @@ public class PurgeStatusRequest {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[progressUri=");
-		sb.append(getProgressUri());
-		sb.append("]");
-		return sb.toString();
+		return ToStringBuilder.reflectionToString(this, Constants.TO_STRING_STYLE);
 	}
 
 }

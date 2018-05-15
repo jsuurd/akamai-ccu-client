@@ -1,5 +1,7 @@
 package org.suurd.akamai.ccu.client.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Class containing configuration properties used by the CCU client.
  *  
@@ -188,25 +190,16 @@ public class Configuration {
 
 	@Override
 	public String toString() {
-		StringBuilder string = new StringBuilder();
-		string.append("[baseAuthority=");
-		string.append(getBaseAuthority());
-		string.append(", accessToken=");
-		string.append(getAccessToken());
-		string.append(", clientToken=");
-		string.append(getClientToken());
-		string.append(", clientSecret=");
-		string.append(getClientSecret() == null ? "" : "*****");
-		string.append(", queuesEndpoint=");
-		string.append(getQueuesEndpoint());
-		string.append(", connectTimeout=");
-		string.append(getConnectTimeout());
-		string.append(", readTimeout=");
-		string.append(getReadTimeout());
-		string.append(", numberOfRetries=");
-		string.append(getNumberOfRetries());
-		string.append("]");
-		return string.toString();
+		return new ToStringBuilder(this, Constants.TO_STRING_STYLE)
+				.append("baseAuthority", getBaseAuthority())
+				.append("accessToken", getAccessToken())
+				.append("clientToken", getClientToken())
+				.append("clientSecret", getClientSecret() != null ? "*****" : null)
+				.append("queuesEndpoint", getQueuesEndpoint())
+				.append("connectTimeout", getConnectTimeout())
+				.append("readTimeout", getReadTimeout())
+				.append("numberOfRetries", getNumberOfRetries())
+				.build();
 	}
 
 }

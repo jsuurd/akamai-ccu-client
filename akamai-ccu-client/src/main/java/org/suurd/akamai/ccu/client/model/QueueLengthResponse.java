@@ -1,5 +1,7 @@
 package org.suurd.akamai.ccu.client.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.google.api.client.util.Key;
 
 /**
@@ -32,17 +34,7 @@ public class QueueLengthResponse extends AbstractResponse {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[queueLength=");
-		sb.append(getQueueLength());
-		sb.append(" httpStatus=");
-		sb.append(getHttpStatus());
-		sb.append(" detail=");
-		sb.append(getDetail());
-		sb.append(", supportId=");
-		sb.append(getSupportId());
-		sb.append("]");
-		return sb.toString();
+		return ToStringBuilder.reflectionToString(this, Constants.TO_STRING_STYLE);
 	}
 
 }

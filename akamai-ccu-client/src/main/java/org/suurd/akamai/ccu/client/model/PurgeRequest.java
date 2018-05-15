@@ -2,6 +2,8 @@ package org.suurd.akamai.ccu.client.model;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.google.api.client.util.Key;
 
 /**
@@ -106,17 +108,7 @@ public class PurgeRequest {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[domain=");
-		sb.append(getDomain());
-		sb.append(" action=");
-		sb.append(getAction());
-		sb.append(", type=");
-		sb.append(getType());
-		sb.append(", objects=");
-		sb.append(getObjects());
-		sb.append("]");
-		return sb.toString();
+		return ToStringBuilder.reflectionToString(this, Constants.TO_STRING_STYLE);
 	}
 
 }
