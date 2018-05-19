@@ -35,7 +35,7 @@ public class ConfigurationPropertiesLoader {
 	 * Gets the configuration properties.
 	 * 
 	 * @return the configuration properties
-	 * @throws IOException
+	 * @throws IOException if an error occurs loading the properties file 
 	 */
 	public Properties getConfigurationProperties() throws IOException {
 		if (properties == null) {

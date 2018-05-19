@@ -8,13 +8,12 @@ import java.text.MessageFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.model.Configuration;
-import org.suurd.akamai.ccu.client.model.Constants;
 import org.suurd.akamai.ccu.client.model.PurgeRequest;
 import org.suurd.akamai.ccu.client.model.PurgeResponse;
-import org.suurd.akamai.ccu.client.model.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.model.PurgeStatusRequest;
 import org.suurd.akamai.ccu.client.model.PurgeStatusResponse;
 import org.suurd.akamai.ccu.client.model.Queue;
+import org.suurd.akamai.ccu.client.model.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
 import org.suurd.akamai.ccu.client.provider.HttpTransportProvider;
 import org.suurd.akamai.ccu.client.util.HttpRequestHelper;
@@ -50,6 +49,8 @@ public class CcuV2Client implements CcuClient {
 	private static final Logger LOG = LoggerFactory.getLogger(CcuV2Client.class);
 
 	private static final JsonFactory JSON_FACTORY = new JacksonFactory();
+
+	private static final String CONTENT_TYPE_JSON = "application/json";
 
 	private Configuration configuration;
 
@@ -211,8 +212,8 @@ public class CcuV2Client implements CcuClient {
 		HttpHeaders headers = request.getHeaders();
 		headers.set("Host", configuration.getBaseAuthority());
 		headers.set("Pragma", "edgegrid-fingerprints-on");
-		headers.setContentType(Constants.CONTENT_TYPE_JSON);
-		headers.setAccept(Constants.CONTENT_TYPE_JSON);
+		headers.setContentType(CONTENT_TYPE_JSON);
+		headers.setAccept(CONTENT_TYPE_JSON);
 		
 		HttpResponse response = request.execute();
 		T ccuResponse;

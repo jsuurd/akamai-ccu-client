@@ -10,6 +10,16 @@ import com.google.api.client.util.Key;
  */
 public abstract class AbstractResponse {
 
+	/**
+	 * HTTP status code for a successful GET request.
+	 */
+	public static final int HTTP_STATUS_GET_SUCCESS = 200;
+
+	/**
+	 * HTTP status code for a successful POST request.
+	 */
+	public static final int HTTP_STATUS_POST_SUCCESS = 201;
+
 	@Key
 	private int httpStatus;
 

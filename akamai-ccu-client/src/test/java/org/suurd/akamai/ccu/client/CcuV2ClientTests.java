@@ -19,7 +19,6 @@ import org.suurd.akamai.ccu.client.mock.ServerErrorResponseMockHttpTransport;
 import org.suurd.akamai.ccu.client.mock.UnathorizedResponseMockHttpTransport;
 import org.suurd.akamai.ccu.client.model.Action;
 import org.suurd.akamai.ccu.client.model.Configuration;
-import org.suurd.akamai.ccu.client.model.Constants;
 import org.suurd.akamai.ccu.client.model.Domain;
 import org.suurd.akamai.ccu.client.model.PurgeRequest;
 import org.suurd.akamai.ccu.client.model.PurgeResponse;
@@ -88,7 +87,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
 	}
 
 	@Test
@@ -107,7 +106,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
 	}
 
 	@Test
@@ -126,7 +125,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
 	}
 
 	@Test
@@ -145,7 +144,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
 	}
 
 	@Test
@@ -223,7 +222,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, new MockHttpTransportProvider(mockTransport));
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
 		// Total number of tries is initial request + callsBeforeSuccess 
 		assertEquals(callsBeforeSuccess + 1, mockTransport.lowLevelExecCalls);
 	}
@@ -331,7 +330,7 @@ public class CcuV2ClientTests {
 		
 		PurgeStatusResponse statusResponse = ccuClient.getPurgeStatus(statusRequest);
 		
-		assertEquals(Constants.HTTP_STATUS_GET_SUCCESS, statusResponse.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_GET_SUCCESS, statusResponse.getHttpStatus());
 		assertEquals(PurgeStatus.IN_PROGRESS, statusResponse.getPurgeStatus());
 	}
 
@@ -341,7 +340,7 @@ public class CcuV2ClientTests {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		QueueLengthResponse response = ccuClient.getQueueLength();
 		
-		assertEquals(Constants.HTTP_STATUS_GET_SUCCESS, response.getHttpStatus());
+		assertEquals(PurgeResponse.HTTP_STATUS_GET_SUCCESS, response.getHttpStatus());
 	}
 
 }
