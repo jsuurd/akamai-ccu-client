@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.CcuClientException;
 import org.suurd.akamai.ccu.client.model.Configuration;
+import org.suurd.akamai.ccu.client.model.ConfigurationBuilder;
 
 /**
  * Implementation of configuration provider that provides the configuration
@@ -25,25 +26,28 @@ public class FileConfigurationProvider implements ConfigurationProvider {
 		if (configuration == null) {
 			Properties configurationProperties = getConfigurationProperties();
 
-			configuration = new Configuration(configurationProperties.getProperty("baseAuthority"),
-					configurationProperties.getProperty("accessToken"),
-					configurationProperties.getProperty("clientToken"),
-					configurationProperties.getProperty("clientSecret"),
-					configurationProperties.getProperty("queuesEndpoint"));
+			ConfigurationBuilder configurationBuilder = Configuration.builder()
+					.baseAuthority(configurationProperties.getProperty("baseAuthority"))
+					.accessToken(configurationProperties.getProperty("accessToken"))
+					.clientToken(configurationProperties.getProperty("clientToken"))
+					.clientSecret(configurationProperties.getProperty("clientSecret"))
+					.queuesEndpoint(configurationProperties.getProperty("queuesEndpoint"));
 
 			// Optional properties
 			String connectTimeout = configurationProperties.getProperty("connectTimeout");
 			if (connectTimeout != null) {
-				configuration.setConnectTimeout(Integer.parseInt(connectTimeout));
+				configurationBuilder.connectTimeout(Integer.parseInt(connectTimeout));
 			}
 			String readTimeout = configurationProperties.getProperty("readTimeout");
 			if (readTimeout != null) {
-				configuration.setReadTimeout(Integer.parseInt(readTimeout));
+				configurationBuilder.readTimeout(Integer.parseInt(readTimeout));
 			}
 			String numberOfRetries = configurationProperties.getProperty("numberOfRetries");
 			if (numberOfRetries != null) {
-				configuration.setNumberOfRetries(Integer.parseInt(numberOfRetries));
+				configurationBuilder.numberOfRetries(Integer.parseInt(numberOfRetries));
 			}
+
+			configuration = configurationBuilder.build();
 		}
 		return configuration;
 	}

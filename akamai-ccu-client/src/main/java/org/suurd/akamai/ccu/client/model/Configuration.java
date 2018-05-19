@@ -26,22 +26,19 @@ public class Configuration {
 	private Integer numberOfRetries;
 
 	/**
-	 * Constructs a new configuration with the specified base authority, access token,
-	 * client token, client secret and queues endpoint.
-	 *  
-	 * @param baseAuthority the base authority
-	 * @param accessToken the access token
-	 * @param clientToken the client token
-	 * @param clientSecret the client secret
-	 * @param queuesEndpoint the client secret
+	 * Constructs a new configuration.
 	 */
-	public Configuration(String baseAuthority, String accessToken, String clientToken, String clientSecret,
-			String queuesEndpoint) {
-		setBaseAuthority(baseAuthority);
-		setAccessToken(accessToken);
-		setClientToken(clientToken);
-		setClientSecret(clientSecret);
-		setQueuesEndpoint(queuesEndpoint);
+	Configuration() {
+		super();
+	}
+
+	/**
+	 * Returns a new configuration builder.
+	 * 
+	 * @return the configuration builder
+	 */
+	public static ConfigurationBuilder builder() {
+		return new ConfigurationBuilder();
 	}
 
 	/**

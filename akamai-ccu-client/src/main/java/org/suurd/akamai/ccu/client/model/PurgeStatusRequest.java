@@ -15,12 +15,19 @@ public class PurgeStatusRequest {
 	private String progressUri;
 
 	/**
-	 * Constructs a purge status with the specified progress URI.
-	 * 
-	 * @param progressUri the progress URI
+	 * Constructs a purge status.
 	 */
-	public PurgeStatusRequest(String progressUri) {
-		setProgressUri(progressUri);
+	PurgeStatusRequest() {
+		super();
+	}
+
+	/**
+	 * Returns a new purge status request builder.
+	 * 
+	 * @return the purge status request builder
+	 */
+	public static PurgeStatusRequestBuilder builder() {
+		return new PurgeStatusRequestBuilder();
 	}
 
 	/**

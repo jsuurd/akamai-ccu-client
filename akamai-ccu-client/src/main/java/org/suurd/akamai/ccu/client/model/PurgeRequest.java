@@ -26,12 +26,19 @@ public class PurgeRequest {
 	private List<String> objects;
 
 	/**
-	 * Constructs a purge request with the specified list of objects.
-	 * 
-	 * @param objects the list of objects 
+	 * Constructs a purge request.
 	 */
-	public PurgeRequest(List<String> objects) {
-		setObjects(objects);
+	PurgeRequest() {
+		super();
+	}
+
+	/**
+	 * Returns a new purge request builder.
+	 * 
+	 * @return the purge request builder
+	 */
+	public static PurgeRequestBuilder builder() {
+		return new PurgeRequestBuilder();
 	}
 
 	/**

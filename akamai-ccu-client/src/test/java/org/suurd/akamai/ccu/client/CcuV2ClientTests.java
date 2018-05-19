@@ -43,7 +43,7 @@ public class CcuV2ClientTests {
 
 	private static final String TEST_CLIENT_TOKEN = "test-client-token";
 
-	private static final String TEST_CLIENT_SECRET = "test-client-cecret";
+	private static final String TEST_CLIENT_SECRET = "test-client-secret";
 
 	private static final String TEST_PURGE_URL = "http://google.com";
 
@@ -59,16 +59,14 @@ public class CcuV2ClientTests {
 			
 			@Override
 			public Configuration getConfiguration() {
-				Configuration configuration = new Configuration(
-						TEST_BASE_AUTHORITY,
-						TEST_ACCESS_TOKEN,
-						TEST_CLIENT_TOKEN,
-						TEST_CLIENT_SECRET,
-						"/ccu/v2/queues/");
-				configuration.setConnectTimeout(5000);
-				configuration.setReadTimeout(10000);
-				configuration.setNumberOfRetries(3);
-				return configuration;
+				return Configuration.builder()
+						.baseAuthority(TEST_BASE_AUTHORITY)
+						.accessToken(TEST_ACCESS_TOKEN)
+						.clientToken(TEST_CLIENT_TOKEN)
+						.clientSecret(TEST_CLIENT_SECRET)
+						.queuesEndpoint("/ccu/v2/queues/")
+						.build();
+				
 			}
 		};
 		this.httpTransportProvider = new ApacheHttpTransportProvider();
@@ -80,10 +78,12 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(TEST_PURGE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
-		purgeRequest.setAction(Action.INVALIDATE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.ARL);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.ARL)
+				.objects(arls)
+				.build();
 		
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
@@ -97,10 +97,12 @@ public class CcuV2ClientTests {
 		List<String> cpCodes = new ArrayList<String>();
 		cpCodes.add(TEST_PURGE_CPCODE);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(cpCodes);
-		purgeRequest.setAction(Action.INVALIDATE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.CPCODE);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.CPCODE)
+				.objects(cpCodes)
+				.build();
 		
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
@@ -114,10 +116,12 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(TEST_PURGE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
-		purgeRequest.setAction(Action.REMOVE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.ARL);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.ARL)
+				.objects(arls)
+				.build();
 		
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
@@ -131,10 +135,12 @@ public class CcuV2ClientTests {
 		List<String> cpCodes = new ArrayList<String>();
 		cpCodes.add(TEST_PURGE_CPCODE);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(cpCodes);
-		purgeRequest.setAction(Action.REMOVE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.CPCODE);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.CPCODE)
+				.objects(cpCodes)
+				.build();
 		
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
@@ -148,10 +154,12 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(HttpTesting.SIMPLE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
-		purgeRequest.setAction(Action.INVALIDATE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.ARL);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.ARL)
+				.objects(arls)
+				.build();
 		
 		Configuration configuration = configurationProvider.getConfiguration();
 		configuration.setConnectTimeout(1);
@@ -175,10 +183,12 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add("http://11-id-en.test.starbucks.com/jeroen.html");
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
-		purgeRequest.setAction(Action.INVALIDATE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.ARL);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.ARL)
+				.objects(arls)
+				.build();
 		
 		Configuration configuration = configurationProvider.getConfiguration();
 		configuration.setReadTimeout(1000);
@@ -205,7 +215,9 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(HttpTesting.SIMPLE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.objects(arls)
+				.build();
 		
 		FailThenSuccessResponseMockHttpTransport mockTransport = new FailThenSuccessResponseMockHttpTransport(callsBeforeSuccess);
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, new MockHttpTransportProvider(mockTransport));
@@ -223,10 +235,13 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(HttpTesting.SIMPLE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
+		PurgeRequest purgeRequest = PurgeRequest.builder().objects(arls).build();
+		
+		Configuration configuration = configurationProvider.getConfiguration();
+		configuration.setNumberOfRetries(numberOfRetries);
 		
 		NoHttpResponseMockHttpTransport mockTransport = new NoHttpResponseMockHttpTransport();
-		CcuClient ccuClient = new CcuV2Client(configurationProvider, new MockHttpTransportProvider(mockTransport));
+		CcuClient ccuClient = new CcuV2Client(new MockConfigurationProvider(configuration), new MockHttpTransportProvider(mockTransport));
 		try {
 			ccuClient.addPurgeRequest(purgeRequest);
 		} catch (CcuClientException e) {
@@ -247,10 +262,13 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(HttpTesting.SIMPLE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
+		PurgeRequest purgeRequest = PurgeRequest.builder().objects(arls).build();
+		
+		Configuration configuration = configurationProvider.getConfiguration();
+		configuration.setNumberOfRetries(numberOfRetries);
 		
 		ServerErrorResponseMockHttpTransport mockTransport = new ServerErrorResponseMockHttpTransport();
-		CcuClient ccuClient = new CcuV2Client(configurationProvider, new MockHttpTransportProvider(mockTransport));
+		CcuClient ccuClient = new CcuV2Client(new MockConfigurationProvider(configuration), new MockHttpTransportProvider(mockTransport));
 		try {
 			ccuClient.addPurgeRequest(purgeRequest);
 		} catch (CcuClientException e) {
@@ -271,10 +289,13 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(HttpTesting.SIMPLE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
+		PurgeRequest purgeRequest = PurgeRequest.builder().objects(arls).build();
+		
+		Configuration configuration = configurationProvider.getConfiguration();
+		configuration.setNumberOfRetries(numberOfRetries);
 		
 		UnathorizedResponseMockHttpTransport mockTransport = new UnathorizedResponseMockHttpTransport();
-		CcuClient ccuClient = new CcuV2Client(configurationProvider, new MockHttpTransportProvider(mockTransport));
+		CcuClient ccuClient = new CcuV2Client(new MockConfigurationProvider(configuration), new MockHttpTransportProvider(mockTransport));
 		try {
 			ccuClient.addPurgeRequest(purgeRequest);
 		} catch (CcuClientException e) {
@@ -294,15 +315,19 @@ public class CcuV2ClientTests {
 		List<String> arls = new ArrayList<String>();
 		arls.add(TEST_PURGE_URL);
 		
-		PurgeRequest purgeRequest = new PurgeRequest(arls);
-		purgeRequest.setAction(Action.INVALIDATE);
-		purgeRequest.setDomain(Domain.STAGING);
-		purgeRequest.setType(Type.ARL);
+		PurgeRequest purgeRequest = PurgeRequest.builder()
+				.domain(Domain.STAGING)
+				.action(Action.INVALIDATE)
+				.type(Type.ARL)
+				.objects(arls)
+				.build();
 		
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, httpTransportProvider);
 		PurgeResponse purgeResponse = ccuClient.addPurgeRequest(purgeRequest);
 		
-		PurgeStatusRequest statusRequest = new PurgeStatusRequest(purgeResponse.getProgressUri());
+		PurgeStatusRequest statusRequest = PurgeStatusRequest.builder()
+				.progressUri(purgeResponse.getProgressUri())
+				.build();
 		
 		PurgeStatusResponse statusResponse = ccuClient.getPurgeStatus(statusRequest);
 		
