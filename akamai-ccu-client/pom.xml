@@ -4,7 +4,7 @@
 	<groupId>org.suurd.akamai</groupId>
 	<artifactId>akamai-ccu-client</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Akamai Content Control Utility Client</name>
 	<url>https://bitbucket.org/jsuurd/akamai-ccu-client</url>
 	
