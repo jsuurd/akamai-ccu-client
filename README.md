@@ -1,29 +1,19 @@
-# README
+# Akamai Content Control Utility Client for Java
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Java client for the Akamai Content Control Utility API.
 
-### What is this repository for?
+## Description
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+The Akamai Content Control Utility API is a simple REST API for automating content purge requests. This client implements the [Akamai Content Control Utility API v2](https://developer.akamai.com/api/purge/ccu-v2/overview.html). 
 
-### How do I get set up?
+The client has the following features:
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Adding a purge request to a purge queue.
+* Getting the status of a previous purge request.
+* Getting the length of a purge queue. 
+* Supporting retry of failed requests using an exponential backoff algorithm.
 
-### Contribution guidelines
+## Dependencies
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to?
-
-* Repo owner or admin
-* Other community or team contact
+* [Akamai EdgeGrid Client for Java](https://github.com/akamai/AkamaiOPEN-edgegrid-java)
+* [Google HTTP Client Library for Java](https://github.com/google/google-http-java-client)
