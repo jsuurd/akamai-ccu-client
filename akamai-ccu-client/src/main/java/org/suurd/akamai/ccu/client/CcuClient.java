@@ -8,8 +8,8 @@ import org.suurd.akamai.ccu.client.model.PurgeStatusResponse;
 import org.suurd.akamai.ccu.client.model.Queue;
 
 /**
- * Interface providing methods representing the Akamai Content Control Utility
- * REST API.
+ * Interface exposing methods provided by the Akamai Content Control Utility v2
+ * API.
  * 
  * @author jsuurd
  */

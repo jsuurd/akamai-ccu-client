@@ -4,8 +4,8 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 
 /**
- * Implementation of {@link HttpTransport} that provides a single
- * globally-shared instance of {@link ApacheHttpTransportProvider}.
+ * Implementation of HTTP transport provider that returns a single
+ * globally-shared instance of {@link HttpTransport}}.
  * 
  * @author jsuurd
  */
