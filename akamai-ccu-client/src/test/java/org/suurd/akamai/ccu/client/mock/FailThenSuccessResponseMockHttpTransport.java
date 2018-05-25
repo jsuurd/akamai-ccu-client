@@ -31,7 +31,7 @@ public class FailThenSuccessResponseMockHttpTransport extends MockHttpTransport 
 				}
 				// Return success when count is more than callsBeforeSuccess
 				MockLowLevelHttpResponse response = new MockLowLevelHttpResponse();
-				response.setStatusCode(200);
+				response.setStatusCode(201);
 				response.setContent("{ \"httpStatus\": 201, \"detail\": \"Request accepted.\" }");
 				return response;
 			}
