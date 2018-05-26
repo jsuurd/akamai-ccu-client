@@ -5,7 +5,7 @@ import com.google.api.client.http.apache.ApacheHttpTransport;
 
 /**
  * Implementation of HTTP transport provider that returns a single
- * globally-shared instance of {@link HttpTransport}}.
+ * globally-shared instance of {@link HttpTransport}.
  * 
  * @author jsuurd
  */

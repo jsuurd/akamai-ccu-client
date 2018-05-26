@@ -11,6 +11,7 @@ public interface EdgeGridFacade {
 	 * Submit a Get request. Returns a response object parsed from a JSON
 	 * response.
 	 * 
+	 * @param <T> the type of response object returned
 	 * @param path the request path
 	 * @param responseClass the response class
 	 * @return the response object
@@ -21,6 +22,7 @@ public interface EdgeGridFacade {
 	 * Submit a Post request with the data object serialized to JSON content.
 	 * Returns a response object parsed from a JSON response
 	 * 
+	 * @param <T> the type of response object returned
 	 * @param path the request path
 	 * @param data the request data
 	 * @param responseClass the response class
