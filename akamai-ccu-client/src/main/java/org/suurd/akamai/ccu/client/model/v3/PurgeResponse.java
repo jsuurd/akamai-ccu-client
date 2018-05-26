@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.v3.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.suurd.akamai.ccu.client.model.AbstractResponse;

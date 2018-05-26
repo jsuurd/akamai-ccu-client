@@ -1,6 +1,7 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v2;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.suurd.akamai.ccu.client.model.Constants;
 
 import com.google.api.client.util.Key;
 

@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.v3.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 /**
  * Enumeration of the network, either staging or production.

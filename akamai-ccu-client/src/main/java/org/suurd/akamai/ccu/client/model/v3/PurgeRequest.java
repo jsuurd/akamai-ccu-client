@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.v3.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 import java.util.List;
 

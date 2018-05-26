@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 import java.util.List;
 
@@ -20,17 +20,6 @@ public class PurgeRequestBuilder implements Builder<PurgeRequest> {
 	 */
 	public PurgeRequestBuilder() {
 		purgeRequest = new PurgeRequest();
-	}
-
-	/**
-	 * Sets the domain to use.
-	 * 
-	 * @param domain the domain to set
-	 * @return this configuration builder instance
-	 */
-	public PurgeRequestBuilder domain(Domain domain) {
-		this.purgeRequest.setDomain(domain);
-		return this;
 	}
 
 	/**
@@ -56,6 +45,17 @@ public class PurgeRequestBuilder implements Builder<PurgeRequest> {
 	}
 
 	/**
+	 * Sets the network to use.
+	 * 
+	 * @param network the network to set
+	 * @return this configuration builder instance
+	 */
+	public PurgeRequestBuilder network(Network network) {
+		this.purgeRequest.setNetwork(network);
+		return this;
+	}
+
+	/**
 	 * Sets the list of URLs, ARLs, or CPCodes.
 	 * 
 	 * @param objects the list of objects to set
@@ -68,6 +68,9 @@ public class PurgeRequestBuilder implements Builder<PurgeRequest> {
 
 	@Override
 	public PurgeRequest build() {
+		Validate.notNull(this.purgeRequest.getAction(), "action cannot be null");
+		Validate.notNull(this.purgeRequest.getType(), "type cannot be null");
+		Validate.notNull(this.purgeRequest.getNetwork(), "network cannot be null");
 		Validate.notNull(this.purgeRequest.getObjects(), "objects cannot be null");
 		return purgeRequest;
 	}

@@ -6,12 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
 import org.suurd.akamai.ccu.client.model.Configuration;
-import org.suurd.akamai.ccu.client.model.PurgeRequest;
-import org.suurd.akamai.ccu.client.model.PurgeResponse;
-import org.suurd.akamai.ccu.client.model.PurgeStatusRequest;
-import org.suurd.akamai.ccu.client.model.PurgeStatusResponse;
-import org.suurd.akamai.ccu.client.model.Queue;
-import org.suurd.akamai.ccu.client.model.QueueLengthResponse;
+import org.suurd.akamai.ccu.client.model.v2.PurgeRequest;
+import org.suurd.akamai.ccu.client.model.v2.PurgeResponse;
+import org.suurd.akamai.ccu.client.model.v2.PurgeStatusRequest;
+import org.suurd.akamai.ccu.client.model.v2.PurgeStatusResponse;
+import org.suurd.akamai.ccu.client.model.v2.Queue;
+import org.suurd.akamai.ccu.client.model.v2.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
 
 /**

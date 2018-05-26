@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.v3;
+package org.suurd.akamai.ccu.client;
 
 import java.text.MessageFormat;
 
@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
 import org.suurd.akamai.ccu.client.model.Configuration;
+import org.suurd.akamai.ccu.client.model.v3.PurgeRequest;
+import org.suurd.akamai.ccu.client.model.v3.PurgeResponse;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
-import org.suurd.akamai.ccu.client.v3.model.PurgeRequest;
-import org.suurd.akamai.ccu.client.v3.model.PurgeResponse;
 
 /**
  * Implementation of the CCU client exposing methods provided by the Akamai
@@ -16,7 +16,7 @@ import org.suurd.akamai.ccu.client.v3.model.PurgeResponse;
  * 
  * @author jsuurd
  */
-public class CcuV3Client implements CcuClient {
+public class CcuV3Client implements FastPurgeClient {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CcuV3Client.class);
 

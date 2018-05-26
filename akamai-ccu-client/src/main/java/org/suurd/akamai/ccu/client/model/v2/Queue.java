@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v2;
 
 /**
  * Enumeration of the queue to use, either default (default) or emergency.

@@ -12,15 +12,13 @@ import org.junit.Test;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
 import org.suurd.akamai.ccu.client.facade.GoogleHttpClientEdgeGridFacade;
 import org.suurd.akamai.ccu.client.model.Configuration;
+import org.suurd.akamai.ccu.client.model.v3.Action;
+import org.suurd.akamai.ccu.client.model.v3.Network;
+import org.suurd.akamai.ccu.client.model.v3.PurgeRequest;
+import org.suurd.akamai.ccu.client.model.v3.PurgeResponse;
+import org.suurd.akamai.ccu.client.model.v3.Type;
 import org.suurd.akamai.ccu.client.provider.ApacheHttpTransportProvider;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
-import org.suurd.akamai.ccu.client.v3.CcuClient;
-import org.suurd.akamai.ccu.client.v3.CcuV3Client;
-import org.suurd.akamai.ccu.client.v3.model.Action;
-import org.suurd.akamai.ccu.client.v3.model.Network;
-import org.suurd.akamai.ccu.client.v3.model.PurgeRequest;
-import org.suurd.akamai.ccu.client.v3.model.PurgeResponse;
-import org.suurd.akamai.ccu.client.v3.model.Type;
 
 public class CcuV3ClientTests {
 
@@ -73,7 +71,7 @@ public class CcuV3ClientTests {
 				.objects(urls)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
@@ -92,7 +90,7 @@ public class CcuV3ClientTests {
 				.objects(urls)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
@@ -111,7 +109,7 @@ public class CcuV3ClientTests {
 				.objects(tags)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
@@ -130,7 +128,7 @@ public class CcuV3ClientTests {
 				.objects(urls)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
@@ -149,7 +147,7 @@ public class CcuV3ClientTests {
 				.objects(urls)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
@@ -168,7 +166,7 @@ public class CcuV3ClientTests {
 				.objects(tags)
 				.build();
 		
-		CcuClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
+		FastPurgeClient client = new CcuV3Client(configurationProvider, edgeGridFacade);
 		PurgeResponse purgeResponse = client.addPurgeRequest(purgeRequest);
 		
 		assertEquals(PurgeResponse.HTTP_STATUS_POST_SUCCESS, purgeResponse.getHttpStatus());
