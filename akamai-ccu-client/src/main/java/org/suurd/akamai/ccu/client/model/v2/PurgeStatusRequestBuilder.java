@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v2;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.Builder;
