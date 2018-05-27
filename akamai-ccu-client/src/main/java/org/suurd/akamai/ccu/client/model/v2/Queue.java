@@ -1,6 +1,7 @@
 package org.suurd.akamai.ccu.client.model.v2;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.suurd.akamai.ccu.client.model.Constants;
 
 /**
  * Enumeration of the queue to use, either default (default) or emergency.
