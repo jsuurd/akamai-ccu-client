@@ -2,22 +2,24 @@ package org.suurd.akamai.ccu.client.provider;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.suurd.akamai.ccu.client.model.Configuration;
 
-public class FileConfigurationProviderTests {
+public class FileConfigurationLoaderTests {
 
-	private ConfigurationProvider configurationProvider;
+	private FileConfigurationLoader configurationLoader;
 
 	@Before
 	public void setUp() throws Exception {
-		configurationProvider = new FileConfigurationProvider();
+		configurationLoader = new FileConfigurationLoader();
 	}
 
 	@Test
-	public void getConfiguration_ReturnsPropertiesFromFile() {
-		Configuration configuration = configurationProvider.getConfiguration();
+	public void getConfiguration_ReturnsPropertiesFromFile() throws IOException {
+		Configuration configuration = configurationLoader.getConfiguration();
 
 		assertEquals("test-base-authority", configuration.getBaseAuthority());
 		assertEquals("test-access-token", configuration.getAccessToken());

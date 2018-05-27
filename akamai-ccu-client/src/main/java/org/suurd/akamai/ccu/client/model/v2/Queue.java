@@ -1,5 +1,7 @@
 package org.suurd.akamai.ccu.client.model.v2;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Enumeration of the queue to use, either default (default) or emergency.
  * 
@@ -33,11 +35,9 @@ public enum Queue {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("[queueName=");
-		sb.append(getQueueName());
-		sb.append("]");
-		return sb.toString();
+		return new ToStringBuilder(this, Constants.TO_STRING_STYLE)
+				.append("queueName", getQueueName())
+				.build();
 	}
 
 	/**
