@@ -1,4 +1,4 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v2;
 
 import com.google.api.client.util.Value;
 

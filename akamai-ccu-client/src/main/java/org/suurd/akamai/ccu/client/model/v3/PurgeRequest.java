@@ -1,8 +1,9 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.suurd.akamai.ccu.client.model.Constants;
 
 import com.google.api.client.util.Key;
 
@@ -13,14 +14,11 @@ import com.google.api.client.util.Key;
  */
 public class PurgeRequest {
 
-	@Key
-	private Domain domain;
-
-	@Key
 	private Action action;
 
-	@Key
 	private Type type;
+
+	private Network network;
 
 	@Key
 	private List<String> objects;
@@ -39,24 +37,6 @@ public class PurgeRequest {
 	 */
 	public static PurgeRequestBuilder builder() {
 		return new PurgeRequestBuilder();
-	}
-
-	/**
-	 * Gets the domain to use.
-	 * 
-	 * @return the domain
-	 */
-	public Domain getDomain() {
-		return domain;
-	}
-
-	/**
-	 * Sets the domain to use.
-	 * 
-	 * @param domain the domain to set
-	 */
-	public void setDomain(Domain domain) {
-		this.domain = domain;
 	}
 
 	/**
@@ -93,6 +73,24 @@ public class PurgeRequest {
 	 */
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	/**
+	 * Gets the network to use.
+	 * 
+	 * @return the network
+	 */
+	public Network getNetwork() {
+		return network;
+	}
+
+	/**
+	 * Sets the network to use.
+	 * 
+	 * @param network the network to set
+	 */
+	public void setNetwork(Network network) {
+		this.network = network;
 	}
 
 	/**

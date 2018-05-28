@@ -1,6 +1,8 @@
-package org.suurd.akamai.ccu.client.model;
+package org.suurd.akamai.ccu.client.model.v3;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.suurd.akamai.ccu.client.model.AbstractResponse;
+import org.suurd.akamai.ccu.client.model.Constants;
 
 import com.google.api.client.util.Key;
 
@@ -15,13 +17,7 @@ public class PurgeResponse extends AbstractResponse {
 	private int estimatedSeconds;
 
 	@Key
-	private String progressUri;
-
-	@Key
 	private String purgeId;
-
-	@Key
-	private int pingAfterSeconds;
 
 	/**
 	 * Gets the minimum amount of time to wait before calling Purge Status.
@@ -42,24 +38,6 @@ public class PurgeResponse extends AbstractResponse {
 	}
 
 	/**
-	 * Gets the progress URI to make Purge Status calls.
-	 * 
-	 * @return the progress URI
-	 */
-	public String getProgressUri() {
-		return progressUri;
-	}
-
-	/**
-	 * Sets the progress URI to make Purge Status calls.
-	 * 
-	 * @param progressUri the progress URI to set
-	 */
-	public void setProgressUri(String progressUri) {
-		this.progressUri = progressUri;
-	}
-
-	/**
 	 * Gets the unique ID for the purge request.
 	 * 
 	 * @return the purgeId
@@ -75,24 +53,6 @@ public class PurgeResponse extends AbstractResponse {
 	 */
 	public void setPurgeId(String purgeId) {
 		this.purgeId = purgeId;
-	}
-
-	/**
-	 * Sets the minimum amount of time to wait before calling Purge Status.
-	 * 
-	 * @return the ping after seconds
-	 */
-	public int getPingAfterSeconds() {
-		return pingAfterSeconds;
-	}
-
-	/**
-	 * Gets the minimum amount of time to wait before calling Purge Status.
-	 * 
-	 * @param pingAfterSeconds the ping after seconds to set
-	 */
-	public void setPingAfterSeconds(int pingAfterSeconds) {
-		this.pingAfterSeconds = pingAfterSeconds;
 	}
 
 	@Override

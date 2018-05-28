@@ -1,15 +1,15 @@
 package org.suurd.akamai.ccu.client;
 
-import org.suurd.akamai.ccu.client.model.PurgeRequest;
-import org.suurd.akamai.ccu.client.model.PurgeResponse;
-import org.suurd.akamai.ccu.client.model.QueueLengthResponse;
-import org.suurd.akamai.ccu.client.model.PurgeStatusRequest;
-import org.suurd.akamai.ccu.client.model.PurgeStatusResponse;
-import org.suurd.akamai.ccu.client.model.Queue;
+import org.suurd.akamai.ccu.client.model.v2.PurgeRequest;
+import org.suurd.akamai.ccu.client.model.v2.PurgeResponse;
+import org.suurd.akamai.ccu.client.model.v2.PurgeStatusRequest;
+import org.suurd.akamai.ccu.client.model.v2.PurgeStatusResponse;
+import org.suurd.akamai.ccu.client.model.v2.Queue;
+import org.suurd.akamai.ccu.client.model.v2.QueueLengthResponse;
 
 /**
- * Interface providing methods representing the Akamai Content Control Utility
- * REST API.
+ * Interface exposing methods provided by the Akamai Content Control Utility v2
+ * API.
  * 
  * @author jsuurd
  */
