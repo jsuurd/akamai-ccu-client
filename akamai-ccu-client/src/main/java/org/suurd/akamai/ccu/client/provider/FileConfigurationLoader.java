@@ -1,8 +1,11 @@
 package org.suurd.akamai.ccu.client.provider;
 
-import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.suurd.akamai.ccu.client.CcuClientException;
 import org.suurd.akamai.ccu.client.model.Configuration;
 import org.suurd.akamai.ccu.client.model.ConfigurationBuilder;
 
@@ -15,7 +18,9 @@ import org.suurd.akamai.ccu.client.model.ConfigurationBuilder;
  */
 public class FileConfigurationLoader {
 
-	private static final String CONFIG_FILENAME = "/akamai-ccu-client.properties";
+	private static final Logger LOG = LoggerFactory.getLogger(FileConfigurationLoader.class);
+
+	private static final String CONFIG_FILENAME = "akamai-ccu-client.properties";
 
 	private Configuration configuration;
 
@@ -23,12 +28,17 @@ public class FileConfigurationLoader {
 	 * Returns the configuration loaded from a properties file.
 	 * 
 	 * @return the configuration
-	 * @throws IOException if an error occurs loading the properties file 
 	 */
-	public Configuration getConfiguration() throws IOException {
+	public Configuration getConfiguration() {
 		if (configuration == null) {
 			Properties properties = new Properties();
-			properties.load(this.getClass().getResourceAsStream(CONFIG_FILENAME));
+			try {
+				properties.load(this.getClass().getResourceAsStream("/" + CONFIG_FILENAME));
+			} catch (Exception e) {
+				String message = MessageFormat.format("Error loading [{0}] property file", CONFIG_FILENAME);
+				LOG.error(message, e);
+				throw new CcuClientException(message, e);
+			}
 			
 			ConfigurationBuilder configurationBuilder = Configuration.builder()
 					.baseAuthority(properties.getProperty("baseAuthority"))
