@@ -61,7 +61,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteUrls_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -80,7 +80,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -99,7 +99,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteTags_ShouldReturnHttpStatusSuccess() {
-		List<String> tags = new ArrayList<String>();
+		List<String> tags = new ArrayList<>();
 		tags.add(testPurgeTag);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -118,7 +118,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateUrls_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -137,7 +137,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -156,7 +156,7 @@ public class CcuV3ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateTags_ShouldReturnHttpStatusSuccess() {
-		List<String> tags = new ArrayList<String>();
+		List<String> tags = new ArrayList<>();
 		tags.add(testPurgeTag);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()

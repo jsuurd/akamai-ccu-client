@@ -62,7 +62,7 @@ public class CcuV2ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateArls_ShouldReturnHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -81,7 +81,7 @@ public class CcuV2ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> cpCodes = new ArrayList<String>();
+		List<String> cpCodes = new ArrayList<>();
 		cpCodes.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -100,7 +100,7 @@ public class CcuV2ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithRemoveArls_ShouldReturnHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -119,7 +119,7 @@ public class CcuV2ClientTests {
 	@Test
 	@Ignore("Integration Test")
 	public void addPurgeRequest_WithRemoveCpCode_ShouldReturnHttpStatusSuccess() {
-		List<String> cpCodes = new ArrayList<String>();
+		List<String> cpCodes = new ArrayList<>();
 		cpCodes.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -137,8 +137,8 @@ public class CcuV2ClientTests {
 
 	@Test
 	@Ignore("Integration Test")
-	public void getPurgeStatus_CheckStatusProgressUri_ReturnsHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+	public void getPurgeStatus_CheckStatusProgressUri_ShouldReturnHttpStatusSuccess() {
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -163,7 +163,7 @@ public class CcuV2ClientTests {
 
 	@Test
 	@Ignore("Integration Test")
-	public void getQueueLength_CheckStatusProgressUri_ReturnsHttpStatusSuccess() {
+	public void getQueueLength_CheckStatusProgressUri_ShouldReturnHttpStatusSuccess() {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, edgeGridFacade);
 		QueueLengthResponse response = ccuClient.getQueueLength();
 		
