@@ -1,7 +1,5 @@
 package org.suurd.akamai.ccu.client;
 
-import java.text.MessageFormat;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
@@ -48,14 +46,14 @@ public class CcuV2Client implements CcuClient {
 	@Override
 	public PurgeResponse addPurgeRequest(PurgeRequest purgeRequest, Queue queue) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Sending purge request {0} to queue {1}", purgeRequest, queue));
+			LOG.debug("Sending purge request {} to queue {}", purgeRequest, queue);
 		}
 		
 		String requestPath = String.join("/", configuration.getQueuesEndpoint(), queue.getQueueName());
 		
 		PurgeResponse purgeResponse = edgeGridFacade.submitPostRequest(requestPath, purgeRequest, PurgeResponse.class);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Received purge response {0}", purgeResponse));
+			LOG.debug("Received purge response {}", purgeResponse);
 		}
 		return purgeResponse;
 		
@@ -64,12 +62,12 @@ public class CcuV2Client implements CcuClient {
 	@Override
 	public PurgeStatusResponse getPurgeStatus(PurgeStatusRequest statusRequest) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Sending status request {0}", statusRequest));
+			LOG.debug("Sending status request {}", statusRequest);
 		}
 		
 		PurgeStatusResponse statusResponse = edgeGridFacade.submitGetRequest(statusRequest.getProgressUri(), PurgeStatusResponse.class);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Received status response {0}", statusResponse));
+			LOG.debug("Received status response {}", statusResponse);
 		}
 		
 		return statusResponse;
@@ -83,14 +81,14 @@ public class CcuV2Client implements CcuClient {
 	@Override
 	public QueueLengthResponse getQueueLength(Queue queue) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Sending queue length request to queue {0}", queue));
+			LOG.debug("Sending queue length request to queue {}", queue);
 		}
 		
 		String requestPath = String.join("/", configuration.getQueuesEndpoint(), queue.getQueueName());
 		
 		QueueLengthResponse queueLengthResponse =  edgeGridFacade.submitGetRequest(requestPath, QueueLengthResponse.class);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Received queue length response {0}", queueLengthResponse));
+			LOG.debug("Received queue length response {}", queueLengthResponse);
 		}
 		
 		return queueLengthResponse;
