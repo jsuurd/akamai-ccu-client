@@ -1,6 +1,6 @@
 package org.suurd.akamai.ccu.client.facade;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -11,13 +11,11 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.suurd.akamai.ccu.client.CcuClientException;
-import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
-import org.suurd.akamai.ccu.client.facade.GoogleHttpClientEdgeGridFacade;
+import org.suurd.akamai.ccu.client.mock.AkamaiCcuMockHttpTransport;
 import org.suurd.akamai.ccu.client.mock.ConnectTimeoutMockHttpTransport;
 import org.suurd.akamai.ccu.client.mock.FailThenSuccessResponseMockHttpTransport;
 import org.suurd.akamai.ccu.client.mock.MockConfigurationProvider;
@@ -33,7 +31,6 @@ import org.suurd.akamai.ccu.client.model.v2.PurgeRequest;
 import org.suurd.akamai.ccu.client.model.v2.PurgeResponse;
 import org.suurd.akamai.ccu.client.model.v2.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.model.v2.Type;
-import org.suurd.akamai.ccu.client.provider.ApacheHttpTransportProvider;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
 import org.suurd.akamai.ccu.client.provider.HttpTransportProvider;
 
@@ -58,7 +55,6 @@ public class GoogleHttpClientEdgeGridFacadeTests {
 		testProperties.load(getClass().getResourceAsStream("/testing.properties"));
 		
 		this.configurationProvider = new ConfigurationProvider() {
-			
 			@Override
 			public Configuration getConfiguration() {
 				return Configuration.builder()
@@ -72,13 +68,16 @@ public class GoogleHttpClientEdgeGridFacadeTests {
 				
 			}
 		};
-		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, new ApacheHttpTransportProvider());
+		
+		// Switch to ApacheHttpTransportProvider for running test against Akamai CCU
+		//HttpTransportProvider httpTransportProvider = new ApacheHttpTransportProvider();
+		HttpTransportProvider httpTransportProvider = new MockHttpTransportProvider(new AkamaiCcuMockHttpTransport(1));
+		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, httpTransportProvider);
 		this.testGetEndpoint = testProperties.getProperty("queuesEndpoint") + "/default";
 		this.testPurgeUrl = testProperties.getProperty("purgeUrl");
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void sendGetRequest_WithValidRequest_ShouldReturnHttpStatusSuccess() {
 		QueueLengthResponse queueLengthResponse = edgeGridFacade.submitGetRequest(testGetEndpoint, QueueLengthResponse.class);
 		
@@ -181,9 +180,8 @@ public class GoogleHttpClientEdgeGridFacadeTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void sendPostRequest_WithValidRequest_ShouldReturnHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
