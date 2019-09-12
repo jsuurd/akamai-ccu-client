@@ -1,16 +1,17 @@
 package org.suurd.akamai.ccu.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
 import org.suurd.akamai.ccu.client.facade.GoogleHttpClientEdgeGridFacade;
+import org.suurd.akamai.ccu.client.mock.AkamaiCcuMockHttpTransport;
+import org.suurd.akamai.ccu.client.mock.MockHttpTransportProvider;
 import org.suurd.akamai.ccu.client.model.Configuration;
 import org.suurd.akamai.ccu.client.model.v2.Action;
 import org.suurd.akamai.ccu.client.model.v2.Domain;
@@ -21,8 +22,8 @@ import org.suurd.akamai.ccu.client.model.v2.PurgeStatusRequest;
 import org.suurd.akamai.ccu.client.model.v2.PurgeStatusResponse;
 import org.suurd.akamai.ccu.client.model.v2.QueueLengthResponse;
 import org.suurd.akamai.ccu.client.model.v2.Type;
-import org.suurd.akamai.ccu.client.provider.ApacheHttpTransportProvider;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
+import org.suurd.akamai.ccu.client.provider.HttpTransportProvider;
 
 public class CcuV2ClientTests {
 
@@ -40,7 +41,6 @@ public class CcuV2ClientTests {
 		testProperties.load(getClass().getResourceAsStream("/testing.properties"));
 		
 		this.configurationProvider = new ConfigurationProvider() {
-			
 			@Override
 			public Configuration getConfiguration() {
 				return Configuration.builder()
@@ -54,15 +54,18 @@ public class CcuV2ClientTests {
 				
 			}
 		};
-		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, new ApacheHttpTransportProvider());
+		
+		// Switch to ApacheHttpTransportProvider for running test against Akamai CCU
+		//HttpTransportProvider httpTransportProvider = new ApacheHttpTransportProvider();
+		HttpTransportProvider httpTransportProvider = new MockHttpTransportProvider(new AkamaiCcuMockHttpTransport(1));
+		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, httpTransportProvider);
 		this.testPurgeCpcode = testProperties.getProperty("purgeCpcode");
 		this.testPurgeUrl = testProperties.getProperty("purgeUrl");
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateArls_ShouldReturnHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -79,9 +82,8 @@ public class CcuV2ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> cpCodes = new ArrayList<String>();
+		List<String> cpCodes = new ArrayList<>();
 		cpCodes.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -98,9 +100,8 @@ public class CcuV2ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithRemoveArls_ShouldReturnHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -117,9 +118,8 @@ public class CcuV2ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithRemoveCpCode_ShouldReturnHttpStatusSuccess() {
-		List<String> cpCodes = new ArrayList<String>();
+		List<String> cpCodes = new ArrayList<>();
 		cpCodes.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -136,9 +136,8 @@ public class CcuV2ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
-	public void getPurgeStatus_CheckStatusProgressUri_ReturnsHttpStatusSuccess() {
-		List<String> arls = new ArrayList<String>();
+	public void getPurgeStatus_CheckStatusProgressUri_ShouldReturnHttpStatusSuccess() {
+		List<String> arls = new ArrayList<>();
 		arls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -162,8 +161,7 @@ public class CcuV2ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
-	public void getQueueLength_CheckStatusProgressUri_ReturnsHttpStatusSuccess() {
+	public void getQueueLength_CheckStatusProgressUri_ShouldReturnHttpStatusSuccess() {
 		CcuClient ccuClient = new CcuV2Client(configurationProvider, edgeGridFacade);
 		QueueLengthResponse response = ccuClient.getQueueLength();
 		

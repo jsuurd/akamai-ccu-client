@@ -1,7 +1,5 @@
 package org.suurd.akamai.ccu.client;
 
-import java.text.MessageFormat;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
@@ -39,14 +37,14 @@ public class CcuV3Client implements FastPurgeClient {
 	@Override
 	public PurgeResponse addPurgeRequest(PurgeRequest purgeRequest) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Sending purge request {0}", purgeRequest));
+			LOG.debug("Sending purge request {}", purgeRequest);
 		}
 		
 		String requestPath = String.join("/", configuration.getQueuesEndpoint(), String.valueOf(purgeRequest.getAction()), String.valueOf(purgeRequest.getType()), String.valueOf(purgeRequest.getNetwork())).toLowerCase();
 		
 		PurgeResponse purgeResponse = edgeGridFacade.submitPostRequest(requestPath, purgeRequest, PurgeResponse.class);
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(MessageFormat.format("Received purge response {0}", purgeResponse));
+			LOG.debug("Received purge response {}", purgeResponse);
 		}
 		
 		return purgeResponse;

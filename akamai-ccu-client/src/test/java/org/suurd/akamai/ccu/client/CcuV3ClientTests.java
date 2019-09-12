@@ -1,24 +1,25 @@
 package org.suurd.akamai.ccu.client;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.suurd.akamai.ccu.client.facade.EdgeGridFacade;
 import org.suurd.akamai.ccu.client.facade.GoogleHttpClientEdgeGridFacade;
+import org.suurd.akamai.ccu.client.mock.AkamaiCcuMockHttpTransport;
+import org.suurd.akamai.ccu.client.mock.MockHttpTransportProvider;
 import org.suurd.akamai.ccu.client.model.Configuration;
 import org.suurd.akamai.ccu.client.model.v3.Action;
 import org.suurd.akamai.ccu.client.model.v3.Network;
 import org.suurd.akamai.ccu.client.model.v3.PurgeRequest;
 import org.suurd.akamai.ccu.client.model.v3.PurgeResponse;
 import org.suurd.akamai.ccu.client.model.v3.Type;
-import org.suurd.akamai.ccu.client.provider.ApacheHttpTransportProvider;
 import org.suurd.akamai.ccu.client.provider.ConfigurationProvider;
+import org.suurd.akamai.ccu.client.provider.HttpTransportProvider;
 
 public class CcuV3ClientTests {
 
@@ -38,7 +39,6 @@ public class CcuV3ClientTests {
 		testProperties.load(getClass().getResourceAsStream("/testing.properties"));
 		
 		this.configurationProvider = new ConfigurationProvider() {
-			
 			@Override
 			public Configuration getConfiguration() {
 				return Configuration.builder()
@@ -52,16 +52,19 @@ public class CcuV3ClientTests {
 				
 			}
 		};
-		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, new ApacheHttpTransportProvider());
+		
+		// Switch to ApacheHttpTransportProvider for running test against Akamai CCU
+		//HttpTransportProvider httpTransportProvider = new ApacheHttpTransportProvider();
+		HttpTransportProvider httpTransportProvider = new MockHttpTransportProvider(new AkamaiCcuMockHttpTransport(1));
+		this.edgeGridFacade = new GoogleHttpClientEdgeGridFacade(configurationProvider, httpTransportProvider);
 		this.testPurgeCpcode = testProperties.getProperty("purgeCpcode");
 		this.testPurgeUrl = testProperties.getProperty("purgeUrl");
 		this.testPurgeTag = testProperties.getProperty("purgeTag");
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteUrls_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -78,9 +81,8 @@ public class CcuV3ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -97,9 +99,8 @@ public class CcuV3ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithDeleteTags_ShouldReturnHttpStatusSuccess() {
-		List<String> tags = new ArrayList<String>();
+		List<String> tags = new ArrayList<>();
 		tags.add(testPurgeTag);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -116,9 +117,8 @@ public class CcuV3ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateUrls_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeUrl);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -135,9 +135,8 @@ public class CcuV3ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateCpCodes_ShouldReturnHttpStatusSuccess() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		urls.add(testPurgeCpcode);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()
@@ -154,9 +153,8 @@ public class CcuV3ClientTests {
 	}
 
 	@Test
-	@Ignore("Integration Test")
 	public void addPurgeRequest_WithInvalidateTags_ShouldReturnHttpStatusSuccess() {
-		List<String> tags = new ArrayList<String>();
+		List<String> tags = new ArrayList<>();
 		tags.add(testPurgeTag);
 		
 		PurgeRequest purgeRequest = PurgeRequest.builder()

@@ -3,7 +3,6 @@ package org.suurd.akamai.ccu.client.facade;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.MessageFormat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,7 +156,7 @@ public class GoogleHttpClientEdgeGridFacade implements EdgeGridFacade {
 		try {
 			int statusCode = response.getStatusCode();
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(MessageFormat.format("Received HTTP response status [statusCode={0}]", statusCode));
+				LOG.debug("Received HTTP response status [statusCode={}]", statusCode);
 			}
 			ccuResponse = response.parseAs(responseClass);
 		} finally {

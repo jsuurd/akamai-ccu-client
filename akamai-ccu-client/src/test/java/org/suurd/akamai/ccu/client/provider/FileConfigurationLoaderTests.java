@@ -18,7 +18,7 @@ public class FileConfigurationLoaderTests {
 	}
 
 	@Test
-	public void getConfiguration_ReturnsPropertiesFromFile() throws IOException {
+	public void getConfiguration_ShouldReturnPropertiesFromFile() throws IOException {
 		Configuration configuration = configurationLoader.getConfiguration();
 
 		assertEquals("test-base-authority", configuration.getBaseAuthority());

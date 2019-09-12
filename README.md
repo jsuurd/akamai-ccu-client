@@ -15,9 +15,11 @@ The client has the following features:
 
 ## Dependencies
 
-* [Akamai EdgeGrid Client for Java](https://github.com/akamai/AkamaiOPEN-edgegrid-java)
-* [Google HTTP Client Library for Java](https://github.com/google/google-http-java-client)
+* [Akamai EdgeGrid Client for Java][3]
+* [Google HTTP Client Library for Java][4]
 
 
 [1]: https://developer.akamai.com/api/purge/ccu-v2/overview.html
 [2]: https://developer.akamai.com/api/purge/ccu/overview.html
+[3]: https://github.com/akamai/AkamaiOPEN-edgegrid-java
+[4]: https://github.com/google/google-http-java-client

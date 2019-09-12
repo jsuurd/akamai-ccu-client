@@ -4,7 +4,7 @@
 	<groupId>org.suurd.akamai</groupId>
 	<artifactId>akamai-ccu-client</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<name>Akamai Content Control Utility Client</name>
 	<url>https://bitbucket.org/jsuurd/akamai-ccu-client</url>
 	
@@ -53,14 +53,27 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>external.atlassian.jgitflow</groupId>
-				<artifactId>jgitflow-maven-plugin</artifactId> 
+				<artifactId>jgitflow-maven-plugin</artifactId>
 				<version>1.0-m5.1</version>
 				<configuration>
 					<enableSshAgent>true</enableSshAgent>
 					<keepBranch>true</keepBranch>
 					<noDeploy>true</noDeploy>
-				</configuration> 
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
